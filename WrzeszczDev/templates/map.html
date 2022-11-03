@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% if plot_list %}
+    <br>
+    <div class="content-section">
+        {% for plot in plot_list %}
+        <a href = "/admin" ><img src="{{plot.img.src }}" style="width:500px;height:600px;> </a>
+        <h5> {{plot.building}} </h5>
+
+            <h1>pierwsza działka</h1>
+        {% endfor %}
+
+
+
+      <!-- FORM HERE -->
+    </div>
+{% endif %}
+{% endblock content %}
