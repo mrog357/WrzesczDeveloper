@@ -5,36 +5,23 @@
     <br>
 <div class="content-section">
 
-    <div class="media col-md-8 col-xs-12">
-
-
-        <form action="" method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="myfile" /><br/>
-            <input type="submit" name="submit" value="Upload" />
-
-        </form>
-        <br>
-    </div>
-
 
     <div class="media-body d-flex flex-row">
         <div class="p-2">
         <img class="rounded-circle account-img" src="{{ user.patrol.image.url }}">
-            <h2 class="account-heading">{{ patrol.name }}</h2>
-            <p class="text-secondary">{{ user.email }}</p>
+            <h2 class="account-heading">{{ hosting_patrol.name }}</h2>
         </div>
         <div clas="p-2">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Talary: <br> {{ patrol.cash | floatformat }} </li>
-                <li class="list-group-item">Punkty: <br> {{ patrol.points | floatformat }} </li>
+                <li class="list-group-item">Talary: <br> {{ hosting_patrol.cash | floatformat }} </li>
+                <li class="list-group-item">Punkty: <br> {{ hosting_patrol.points | floatformat }} </li>
             </ul>
         </div>
     </div>
 
 
 
-    <a href="/add_code" type="button" class="btn btn-success btn-lg btn-block">Wprowadź kod</a>
+
 </div>
 <br><br>
 {% if plot_list %}

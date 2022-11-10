@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+        <br>
+        <br>
+        {% for building in building_list %}
+        <a href="/adminex/{{plot.id}}/build/{{building.name}}"><button>{{building.name}}</button></a>
+        {% endfor %}
+    </div>
+<br>
+
+{% if plot %}
+<div class="content-section">
+    <h4>{{plot.name}}</h4>
+    {% if plot.owner %}
+    <h5>Należy do <a href="visit/{plot.owner.name}" style="text-decoration: none">{{plot.owner}}</a></h5>
+</div>
+
+<div class="content-section">
+    <br>
+    <h5> Znajduje się na niej {{plot.building.name}} </h5>
+    <br>
+    <img src="{{plot.building.image.url}}" style="width: 70vw; high: auto;">
+    <br>
+    {% if building.description %}
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <p>{{building.description}}</p>
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <h4> Punkty : {{plot.points}}</h4>
+
+    {% else %}
+    <h4> Działka jest dostępna do zabudowy. </h4>
+</div>
+
+{% endif %}
+
+{% endif %}
+{% endblock content %}

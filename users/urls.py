@@ -1,5 +1,4 @@
 from django.urls import path
-from . import views
 from django.contrib.auth import views as auth_views
 
 
@@ -18,4 +17,8 @@ urlpatterns = [
         auth_views.LogoutView.as_view(template_name="users/logout.html"),
         name="logout",
     ),
+
+    path("accounts/profile/", views.profile, name="profile"),
+
+    path("visit/<str:patrol_name>", views.visit, name="visit")
 ]

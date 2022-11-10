@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <br>
+    <div class="content-section">
+         <form method="get">
+            {% csrf_token %}
+            <div class="form-group">
+
+                <input type="text" class="form-control" name="inputed_code">
+                <small id="kodHelp" class="form-text text-muted">Z uwzględnieniem wielkości liter</small>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary button" value="Zatwierdz" name="btn"/>
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

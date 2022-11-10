@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <br>
+    <div class="content-section">
+        {% if patrol_list %}
+        <h2 class="text-center"><b>Tabela wyników</b></h2>
+      <table class="table">
+        <tr>
+          <th>Patrol</th>
+          <th>Punkty</th>
+        </tr>
+        {% for patrol in patrol_list %}
+        <tr>
+            <td>
+                <image src="{{patrol.image.url}}" style="height: 40px; width: auto" class="rounded-circle" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    <a href="visit/{{patrol.name}}" style="text-decoration: none">{{patrol.name}}</a>
+            </td>
+            <td>{{patrol.points}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% endif %}
+
+    </div>
+
+{% endblock content %}

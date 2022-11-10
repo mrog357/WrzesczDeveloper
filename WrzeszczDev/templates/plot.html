@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<br>
+
+{% if plot %}
+<div class="content-section text-center">
+    <h4>{{plot.name}}</h4>
+    {% if plot.owner %}
+    <h6>Należy do <a href="visit/{plot.owner.name}" style="text-decoration: none">{{plot.owner}}</a></h6>
+</div>
+
+<div class="content-section text-center">
+    <br>
+    <h6> Znajduje się na niej {{plot.building.name}} </h6>
+    <br>
+    <img src="{{plot.building.image.url}}" style="width: 70vw; high: auto;">
+    <br>
+    {% if building.description %}
+    <div class="row">
+        <div class="col-md-8 col-sm-12">
+            <p>{{building.description}}</p>
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <h4> Punkty : {{plot.points}}</h4>
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <a href="/{{plot.id}}/building/{{plot.building.name}}" type="button" class="btn btn-primary btn-lg btn-block ">Szczegóły budynku</a>
+        </div>
+    </div>
+
+    {% else %}
+    <h6> Działka jest dostępna do zabudowy. </h6>
+</div>
+<br>
+<div class="content-section text-center">
+    <h5> Możesz na niej zbudować: </h5>  <br>
+</div>
+{% for building in building_list %}
+<br>
+<div class="content-section">
+    <div class="row">
+        <div class="col-md-12 col-sm-12">
+            <h4 class="text-center">{{building.name}}</h4>
+        </div>
+    </div>
+    {% if building.is_limited %}
+    <div class="row">
+        <h6>W dzielnicy mogą powstać jeszcze {{building.limit}} takie budynki</h6>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 text-center">
+            <img src="{{building.image.url}}" class="img-fluid"/>
+        </div>
+    </div>
+
+    {% if building.description %}
+    <br>
+
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12">
+            <p>{{building.description}}</p>
+        </div>
+    </div>
+
+    {% endif %}
+    <br>
+    <div class="row">
+        <div class="col-md-6 col-sm-6">
+            <a href="/{{plot.id}}/building/{{building.name}}" type="button" class="btn btn-primary btn-lg btn-block ">Szczegóły</a>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <a href="/{{plot.id}}/build/{{building.id}}" type="button" class="btn btn-success btn-lg btn-block">Wybuduj</a>
+        </div>
+
+    </div>
+</div>
+
+{% endfor %}
+
+
+{% endif %}
+
+{% endif %}
+
+
+{% endblock content %}

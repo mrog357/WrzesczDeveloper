@@ -2,19 +2,62 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% if plot_list %}
-    <br>
-    <div class="content-section">
-        {% for plot in plot_list %}
-        <a href = "/admin" ><img src="{{plot.img.src }}" style="width:500px;height:600px;> </a>
-        <h5> {{plot.building}} </h5>
 
-            <h1>pierwsza działka</h1>
-        {% endfor %}
+    <br>
+<style>
+    .holder {
+width:100%;
+min-height: 80vh;
+overflow-x: auto;
+overflow-y: auto;
+}
+
+
+
+</style>
+
+
+
+
+        <div class="container content-section">
+            <div class="row">
+
+                    <a href="/zoom/1"><button type="button" class="btn btn-primary">Powiększ</button></a>
+                    <div class="holder position-relative">
+
+                        <image src="{{bg_image.url}}" style="position: absolute;
+                                top: 0px;
+                                left: 0px;
+                                height: 649px;
+                                width: 614px;"/>
+
+                        {% for plot in plot_list %}
+                        <style>
+                            .plot{{plot.id}}{
+                                position: absolute;
+                                top: {{plot.pic_position_y}}px;
+                                left: {{plot.pic_position_x}}px;
+                                height: {{plot.pic_height}}px;
+                            }
+                        </style>
+                        <a href = "/{{plot.id}}" ><img src="{{plot.color.icon.url }}" alt="nie udało się" class="plot{{plot.id}}"> </a>
+                        {% endfor %}
+                    </div>
+
+
+            </div>
+        </div>
+
+
+
+
+
+
 
 
 
       <!-- FORM HERE -->
-    </div>
-{% endif %}
+
+
+
 {% endblock content %}
